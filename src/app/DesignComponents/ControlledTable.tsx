@@ -170,35 +170,21 @@ export default function ControlledTable({
                             {start}-{end} of {data?.length}
                         </div>
                         <div className="">
-                            <div
-                                className="btn-group"
-                                role="group"
-                                aria-label="Basic example"
-                            >
-                                <button
-                                    onClick={() => prevBtnClicked()}
-                                    disabled={!tableInstance.getCanPreviousPage()}
-                                    type="button"
-                                    className="btn btn-secondary"
-                                >
-                                    Prev
-                                </button>
-                                <span
-                                    className="btn btn-secondary"
-                                    style={{ cursor: "default", pointerEvents: "none" }}
-                                >
-                                    Page {tableInstance.getState().pagination.pageIndex + 1} of{" "}
-                                    {tableInstance.getPageCount()}
-                                </span>
-                                <button
-                                    onClick={() => nextBtnClicked()}
-                                    disabled={!tableInstance.getCanNextPage()}
-                                    type="button"
-                                    className="btn btn-secondary"
-                                >
-                                    Next
-                                </button>
-                            </div>
+                            <nav aria-label="Page navigation">
+                                <ul className="pagination">
+                                    <li className="page-item"><button onClick={() => prevBtnClicked()}
+                                        disabled={!tableInstance.getCanPreviousPage()}
+                                        type="button" className="page-link mx-1">Back</button></li>
+                                    <li className="page-item"><button className="page-link mx-1 active" onClick={() => { tableInstance.setPageIndex(1) }}>1</button></li>
+                                    <li className="page-item"><button className="page-link mx-1" onClick={() => { tableInstance.setPageIndex(2) }}>2</button></li>
+                                    <li className="page-item"><button className="page-link mx-1" onClick={() => { tableInstance.setPageIndex(3) }}>3</button></li>
+                                    <li className="page-item"><button className="page-link mx-1">...</button></li>
+                                    <li className="page-item"><button className="page-link mx-1">10</button></li>
+                                    <li className="page-item"><button onClick={() => nextBtnClicked()}
+                                        disabled={!tableInstance.getCanNextPage()}
+                                        type="button" className="page-link mx-1">Next</button></li>
+                                </ul>
+                            </nav>
                         </div>
 
                         <div className="mx-2">

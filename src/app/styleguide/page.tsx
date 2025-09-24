@@ -283,7 +283,7 @@ export default function StyleGuide() {
             <div className="row my-5">
                 <div className="col-12">
                     <h1>Pagination</h1>
-                    <nav aria-label="Page navigation example">
+                    <nav aria-label="Page navigation">
                         <ul className="pagination">
                             <li className="page-item"><a className="page-link mx-1" href="#">Back</a></li>
                             <li className="page-item"><a className="page-link mx-1 active" href="#">1</a></li>
