@@ -1,4 +1,139 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import ControlledTable from "../DesignComponents/ControlledTable";
+
+type Invoice = {
+    id: string;
+    productName: string;
+    quantity: number;
+    totalPrice: number;
+    date: string;
+    customer: string;
+};
+
 export default function StyleGuide() {
+    const columns = useMemo(
+        () => [
+            {
+                header: "Reconciliation ID",
+                accessorKey: "id",
+            },
+            {
+                header: "Priority",
+                accessorKey: "date",
+            },
+            {
+                header: "Status",
+                accessorKey: "customer",
+            },
+            {
+                header: "Reconciliation Balance",
+                accessorKey: "productName",
+            },
+            {
+                header: "Currency",
+                accessorKey: "quantity",
+            },
+            {
+                header: "Created on",
+                accessorKey: "totalPrice",
+            },
+        ],
+        []
+    );
+    const [data, setData] = useState<Invoice[]>(() => [
+        {
+            id: "134567865",
+            productName: "Gold Necklace",
+            quantity: 2,
+            totalPrice: 500,
+            date: "2025-04-10",
+            customer: "Alice Johnson",
+        },
+        {
+            id: "234567865",
+            productName: "Diamond Ring",
+            quantity: 1,
+            totalPrice: 500,
+            date: "2025-04-11",
+            customer: "Bob Smith",
+        },
+        {
+            id: "334567865",
+            productName: "Silver Bracelet",
+            quantity: 3,
+            totalPrice: 450,
+            date: "2025-04-12",
+            customer: "Charlie Brown",
+        },
+        {
+            id: "434567865",
+            productName: "Pearl Earrings",
+            quantity: 1,
+            totalPrice: 180,
+            date: "2025-04-13",
+            customer: "Diana Prince",
+        },
+        {
+            id: "534567865",
+            productName: "Emerald Pendant",
+            quantity: 2,
+            totalPrice: 600,
+            date: "2025-04-13",
+            customer: "Eva Green",
+        },
+        {
+            id: "634567865",
+            productName: "Rose Gold Anklet",
+            quantity: 4,
+            totalPrice: 480,
+            date: "2025-04-14",
+            customer: "Frank Ocean",
+        },
+        {
+            id: "734567865",
+            productName: "Platinum Chain",
+            quantity: 1,
+            totalPrice: 600,
+            date: "2025-04-14",
+            customer: "George Lucas",
+        },
+        {
+            id: "834567865",
+            productName: "Turquoise Necklace",
+            quantity: 2,
+            totalPrice: 440,
+            date: "2025-04-15",
+            customer: "Hannah Lee",
+        },
+        {
+            id: "934567865",
+            productName: "Sapphire Ring",
+            quantity: 1,
+            totalPrice: 450,
+            date: "2025-04-15",
+            customer: "Iris West",
+        },
+        {
+            id: "1345678650",
+            productName: "Amethyst Bracelet",
+            quantity: 3,
+            totalPrice: 510,
+            date: "2025-04-16",
+            customer: "John Snow",
+        },
+    ]);
+    const fallbackData = [
+        {
+            name: "Fallback User",
+            email: "fallback@example.com",
+            role: "Guest",
+            age: "33",
+            department: "new",
+        },
+    ];
+
     return <>
         <div className="container py-5">
             <div className="row">
@@ -159,6 +294,42 @@ export default function StyleGuide() {
                             <li className="page-item"><a className="page-link mx-1" href="#">Next</a></li>
                         </ul>
                     </nav>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-12">
+                    <ControlledTable
+                        title={"Records"}
+                        titleTabs={
+                            <ul className="nav nav-pills">
+                                <li className="nav-item me-2">
+                                    <a className="nav-link rounded-5 active" aria-current="page" href="#">All</a>
+                                </li>
+                                <li className="nav-item me-2">
+                                    <a className="nav-link rounded-5" href="#">Prepare</a>
+                                </li>
+                                <li className="nav-item me-2">
+                                    <a className="nav-link rounded-5" href="#">Review</a>
+                                </li>
+                                <li className="nav-item me-2">
+                                    <a className="nav-link rounded-5" href="#">Reject</a>
+                                </li>
+                                <li className="nav-item me-2">
+                                    <a className="nav-link rounded-5" href="#">Complete</a>
+                                </li>
+                            </ul>
+                        }
+                        border={0}
+                        cellPadding={10}
+                        style={{ borderCollapse: "collapse", width: "100%" }}
+                        columns={columns}
+                        data={data}
+                        fallbackData={fallbackData}
+                        sorting={true}
+                        headerSticky={true}
+                        tableButtonLink={"/dashboard"}
+                        tableButtonText={"+ Download"}
+                    />
                 </div>
             </div>
         </div>
