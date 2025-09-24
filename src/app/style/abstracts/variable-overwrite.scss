@@ -1,5 +1,8 @@
 @import "./variable";
 
+$line-height-base: 1.6; // NOT 1.6rem
+$font-size-base: 0.875rem; // or 14px
+
 // Badge variables
 $badge-border-radius: 4px;
 $badge-padding-x: 0.7em;
@@ -14,6 +17,21 @@ $alert-padding-y: 0.5em;
 $alert-font-weight: 600;
 $alert-font-size: 0.95rem;
 
+// Button variables
+$btn-border-radius: 6px;
+$btn-padding-x: 1.2em;
+$btn-padding-y: 0.4em;
+
+// Nav Links
+$nav-link-padding-y: 0.2rem; 
+$nav-link-padding-x: 1rem;
+
+// Pagination
+$pagination-border-radius: 6px;
+$pagination-padding-x: 0.8rem;
+$pagination-padding-y: 0.4rem;
+
+
 // Theme colors map
 $theme-colors: (
   "primary": $primary,
@@ -24,6 +42,7 @@ $theme-colors: (
   "transparent": $transparent,
   "dark": $dark,
   "muted": $muted,
+  "grey": $grey,
   "light-primary": $light-primary,
   "light-success": $light-success,
   "light-info": $light-info,

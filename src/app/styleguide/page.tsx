@@ -87,6 +87,80 @@ export default function StyleGuide() {
                     <span className="badge border border-info bg-light-info text-info mx-1">Info</span>
                 </div>
             </div>
+            <div className="row my-5">
+                <div className="col-12">
+                    <h1>Buttons</h1>
+                    <button type="button" className="btn btn-primary m-1">Primary</button>
+                    <button type="button" className="btn btn-success m-1">Success</button>
+                    <button type="button" className="btn btn-danger m-1">Danger</button>
+                    <button type="button" className="btn btn-warning m-1">Warning</button>
+                    <button type="button" className="btn btn-info m-1">Info</button>
+                    <br />
+                    <button type="button" className="btn btn-outline-primary m-1">Primary</button>
+                    <button type="button" className="btn btn-outline-success m-1">Success</button>
+                    <button type="button" className="btn btn-outline-danger m-1">Danger</button>
+                    <button type="button" className="btn btn-outline-warning m-1">Warning</button>
+                    <button type="button" className="btn btn-outline-info m-1">Info</button>
+                    <br />
+                    <button type="button" className="btn border-primary btn-light-primary m-1">Primary</button>
+                    <button type="button" className="btn border-success btn-light-success m-1">Success</button>
+                    <button type="button" className="btn border-danger btn-light-danger m-1">Danger</button>
+                    <button type="button" className="btn border-warning btn-light-warning m-1">Warning</button>
+                    <button type="button" className="btn border-info btn-light-info m-1">Info</button>
+
+                </div>
+            </div>
+            <div className="row my-5">
+                <div className="col-12">
+                    <h1>Nav Pills</h1>
+                    <ul className="nav nav-pills">
+                        <li className="nav-item me-2">
+                            <a className="nav-link rounded-5 active" aria-current="page" href="#">All</a>
+                        </li>
+                        <li className="nav-item me-2">
+                            <a className="nav-link rounded-5" href="#">Prepare</a>
+                        </li>
+                        <li className="nav-item me-2">
+                            <a className="nav-link rounded-5" href="#">Review</a>
+                        </li>
+                        <li className="nav-item me-2">
+                            <a className="nav-link rounded-5" href="#">Reject</a>
+                        </li>
+                        <li className="nav-item me-2">
+                            <a className="nav-link rounded-5" href="#">Complete</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div className="row my-5">
+                <div className="col-12">
+                    <h1>Nav Tabs</h1>
+                    <ul className="nav nav-tabs p-1">
+                        <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="#">Details</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Comments</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div className="row my-5">
+                <div className="col-12">
+                    <h1>Pagination</h1>
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination">
+                            <li className="page-item"><a className="page-link mx-1" href="#">Back</a></li>
+                            <li className="page-item"><a className="page-link mx-1 active" href="#">1</a></li>
+                            <li className="page-item"><a className="page-link mx-1" href="#">2</a></li>
+                            <li className="page-item"><a className="page-link mx-1" href="#">3</a></li>
+                            <li className="page-item"><a className="page-link mx-1" href="#">...</a></li>
+                            <li className="page-item"><a className="page-link mx-1" href="#">10</a></li>
+                            <li className="page-item"><a className="page-link mx-1" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </div>
     </>
 }

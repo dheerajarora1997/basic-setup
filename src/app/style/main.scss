@@ -1,6 +1,8 @@
-@import "./getBootstrap.scss";
 
-@import "./abstracts/variable", "./abstracts/helper";
+@import "./abstracts/variable";
+
+@import "./getBootstrap.scss";
+@import "./abstracts/helper";
 
 // @import "./components/scrollBar";
 @import "./base/typography";
