@@ -1,0 +1,32 @@
+@import "./variable";
+
+// Badge variables
+$badge-border-radius: 4px;
+$badge-padding-x: 0.7em;
+$badge-padding-y: 0.6em;
+$badge-font-weight: 600;
+$badge-font-size: 0.85rem; 
+
+// Alert variables
+$alert-border-radius: 4px;
+$alert-padding-x: 0.7em;
+$alert-padding-y: 0.5em;
+$alert-font-weight: 600;
+$alert-font-size: 0.95rem;
+
+// Theme colors map
+$theme-colors: (
+  "primary": $primary,
+  "info": $info,
+  "warning": $warning,
+  "success": $success,
+  "danger": $danger,
+  "transparent": $transparent,
+  "dark": $dark,
+  "muted": $muted,
+  "light-primary": $light-primary,
+  "light-success": $light-success,
+  "light-info": $light-info,
+  "light-warning" : $light-warning,
+  "light-danger" : $light-danger
+);
