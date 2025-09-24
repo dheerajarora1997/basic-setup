@@ -171,7 +171,7 @@ export default function ControlledTable({
                         </div>
                         <div className="">
                             <nav aria-label="Page navigation">
-                                <ul className="pagination">
+                                <ul className="pagination m-0">
                                     <li className="page-item"><button onClick={() => prevBtnClicked()}
                                         disabled={!tableInstance.getCanPreviousPage()}
                                         type="button" className="page-link mx-1">Back</button></li>

@@ -165,6 +165,23 @@ export default function StyleGuide() {
                 <div className="col-1">
                     <div className="p-5 m-2 bg-transparent rounded"></div>
                 </div>
+                <div className="col-12"></div>
+                <div className="col-1">
+                    <div className="p-5 m-2 bg-light-primary border border-primary rounded"></div>
+                </div>
+                <div className="col-1">
+                    <div className="p-5 m-2 bg-light-success border border-success rounded"></div>
+
+                </div>
+                <div className="col-1">
+                    <div className="p-5 m-2 bg-light-info border border-info rounded"></div>
+                </div>
+                <div className="col-1">
+                    <div className="p-5 m-2 bg-light-warning border border-warning rounded"></div>
+                </div>
+                <div className="col-1">
+                    <div className="p-5 m-2 bg-light-danger border border-danger rounded"></div>
+                </div>
             </div>
             <div className="row my-5">
                 <div className="col-12">
