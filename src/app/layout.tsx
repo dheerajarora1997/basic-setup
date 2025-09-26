@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.scss";
 import "./style/main.scss";
@@ -27,6 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Script
+          src="/bootstrap.min.js"
+          strategy="afterInteractive"
+        />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
           {children}
       </body>
