@@ -5,16 +5,16 @@ $font-size-base: 0.875rem; // or 14px
 
 // Badge variables
 $badge-border-radius: 4px;
-$badge-padding-x: 0.7em;
-$badge-padding-y: 0.6em;
-$badge-font-weight: 600;
-$badge-font-size: 0.85rem; 
+$badge-padding-x: 0.5em;
+$badge-padding-y: 0.4em;
+$badge-font-weight: 400;
+$badge-font-size: 0.85rem;
 
 // Alert variables
 $alert-border-radius: 4px;
-$alert-padding-x: 0.7em;
-$alert-padding-y: 0.5em;
-$alert-font-weight: 600;
+$alert-padding-x: 0.4em;
+$alert-padding-y: 0.2em;
+$alert-font-weight: 400;
 $alert-font-size: 0.95rem;
 
 // Button variables
@@ -23,14 +23,13 @@ $btn-padding-x: 1.2em;
 $btn-padding-y: 0.4em;
 
 // Nav Links
-$nav-link-padding-y: 0.2rem; 
+$nav-link-padding-y: 0.2rem;
 $nav-link-padding-x: 1rem;
 
 // Pagination
 $pagination-border-radius: 6px;
 $pagination-padding-x: 0.8rem;
 $pagination-padding-y: 0.4rem;
-
 
 // Theme colors map
 $theme-colors: (
@@ -46,6 +45,6 @@ $theme-colors: (
   "light-primary": $light-primary,
   "light-success": $light-success,
   "light-info": $light-info,
-  "light-warning" : $light-warning,
-  "light-danger" : $light-danger
+  "light-warning": $light-warning,
+  "light-danger": $light-danger,
 );

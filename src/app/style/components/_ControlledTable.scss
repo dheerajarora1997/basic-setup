@@ -2,171 +2,177 @@
 @import "../abstracts/variable-overwrite.scss";
 
 .controlled-table {
-    position: relative;
+  position: relative;
+  width: 100%;
+  // box-shadow: $box-shadow;
+  border: 1px solid #e5e5e5;
+  border-radius: $btn-border-radius;
+
+  table {
     width: 100%;
-    // box-shadow: $box-shadow;
-    border: 1px solid #E5E5E5;
-    border-radius: $btn-border-radius;
+    border-collapse: collapse;
+    overflow: hidden !important;
+    background-color: $white;
 
+    tr {
+      border-bottom: 1px solid $grey;
+
+      th {
+        color: $muted;
+        font-weight: 400;
+        padding: $alert-padding-x;
+        background-color: $light;
+        &:last-child {
+          min-width: 100px;
+          text-align: right;
+        }
+      }
+      td {
+        background: $transparent;
+        color: $dark;
+        font-weight: 400;
+        padding: $alert-padding-x;
+        &:last-child {
+          padding-right: 30px;
+          text-align: right;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          td,
+          th {
+            // background: $offWhite;
+          }
+        }
+
+        // &:nth-child(even) {
+
+        //     td,
+        //     th {
+        //         background: $text;
+        //     }
+        // }
+
+        .table-action button {
+          opacity: 0.6;
+          max-width: 30px;
+          min-width: 20px;
+        }
+
+        &:hover {
+          td,
+          th {
+            // background: rgba($quinary, 0.3);
+          }
+
+          .table-action button {
+            opacity: 0.8;
+          }
+        }
+      }
+    }
+  }
+
+  &.table-sticky {
     table {
-        width: 100%;
-        border-collapse: collapse;
-        overflow: hidden !important;
-        background-color: $white;
+      overflow: auto;
+    }
 
+    table thead tr th,
+    table thead tr td {
+      position: sticky;
+      top: 0;
+    }
+
+    table[data-colfix="1"] td:first-child,
+    table[data-colfix="1"] th:first-child,
+    table[data-colfix="2"] td:first-child,
+    table[data-colfix="2"] th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 11;
+      border-right: none;
+    }
+
+    table[data-colfix="1"] td:first-child,
+    table[data-colfix="1"] th:first-child {
+      // border-right: 1px solid #eee;
+    }
+
+    table[data-last-col="true"] td:last-child,
+    table[data-last-col="true"] th:last-child {
+      position: sticky;
+      right: 0;
+      z-index: 11;
+      // border-left: 1px solid #eee;
+    }
+
+    table[data-colfix="2"] td:nth-child(2),
+    table[data-colfix="2"] th:nth-child(2) {
+      position: sticky;
+      z-index: 11;
+      // border-right: 1px solid #eee;
+    }
+  }
+
+  @media only screen and (max-width: 769px) {
+    table {
+      thead {
+        display: none;
+      }
+
+      tbody {
         tr {
-            border-bottom: 1px solid $grey;
+          // border-bottom: 5px solid $dullWhite;
 
-            th{
-                color: $muted;
-                font-weight: 400;
-                padding: $alert-padding-x;
-                background-color: $light;
+          &.grid-table-row {
+            border-top: 11px solid #f1f3f4;
+
+            &:first-child {
+              border: none;
             }
-            td {
-                background: $transparent;
-                color: $dark;
-                font-weight: 400;
-                padding: $alert-padding-x;
+          }
+
+          td {
+            width: 100%;
+            display: block;
+            padding-left: 40% !important;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+            @media only screen and (max-width: 767px) {
+              padding-left: 35% !important;
+              position: relative;
             }
+
+            &:last-child {
+              padding-bottom: 10px;
+            }
+
+            &:not(:empty) {
+              &:before {
+                content: attr(data-title);
+                font-size: 14px;
+                color: #999;
+                line-height: 1.2;
+                fw: unset;
+                position: absolute;
+                width: 30%;
+                top: 14px;
+                left: 20px;
+                word-break: break-word;
+
+                @media only screen and (max-width: 767px) {
+                  font-size: 11px;
+                }
+              }
+            }
+          }
         }
-
-        tbody {
-            tr {
-                &:nth-child(odd) {
-
-                    td,
-                    th {
-                        // background: $offWhite;
-                    }
-                }
-
-                // &:nth-child(even) {
-
-                //     td,
-                //     th {
-                //         background: $text;
-                //     }
-                // }
-
-                .table-action button {
-                    opacity: 0.6;
-                    max-width: 30px;
-                    min-width: 20px;
-                }
-
-                &:hover {
-
-                    td,
-                    th {
-                        // background: rgba($quinary, 0.3);
-                    }
-
-                    .table-action button {
-                        opacity: 0.8;
-                    }
-                }
-            }
-        }
+      }
     }
-
-    &.table-sticky {
-        table {
-            overflow: auto;
-        }
-
-        table thead tr th,
-        table thead tr td {
-            position: sticky;
-            top: 0;
-        }
-
-        table[data-colfix="1"] td:first-child,
-        table[data-colfix="1"] th:first-child,
-        table[data-colfix="2"] td:first-child,
-        table[data-colfix="2"] th:first-child {
-            position: sticky;
-            left: 0;
-            z-index: 11;
-            border-right: none;
-        }
-
-        table[data-colfix="1"] td:first-child,
-        table[data-colfix="1"] th:first-child {
-            // border-right: 1px solid #eee;
-        }
-
-        table[data-last-col="true"] td:last-child,
-        table[data-last-col="true"] th:last-child {
-            position: sticky;
-            right: 0;
-            z-index: 11;
-            // border-left: 1px solid #eee;
-        }
-
-        table[data-colfix="2"] td:nth-child(2),
-        table[data-colfix="2"] th:nth-child(2) {
-            position: sticky;
-            z-index: 11;
-            // border-right: 1px solid #eee;
-        }
-    }
-
-    @media only screen and (max-width: 769px) {
-        table {
-            thead {
-                display: none;
-            }
-
-            tbody {
-                tr {
-                    // border-bottom: 5px solid $dullWhite;
-
-                    &.grid-table-row {
-                        border-top: 11px solid #f1f3f4;
-
-                        &:first-child {
-                            border: none;
-                        }
-                    }
-
-                    td {
-                        width: 100%;
-                        display: block;
-                        padding-left: 40% !important;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
-
-                        @media only screen and (max-width: 767px) {
-                            padding-left: 35% !important;
-                            position: relative;
-                        }
-
-                        &:last-child {
-                            padding-bottom: 10px;
-                        }
-
-                        &:not(:empty) {
-                            &:before {
-                                content: attr(data-title);
-                                font-size: 14px;
-                                color: #999;
-                                line-height: 1.2;
-                                fw: unset;
-                                position: absolute;
-                                width: 30%;
-                                top: 14px;
-                                left: 20px;
-                                word-break: break-word;
-
-                                @media only screen and (max-width: 767px) {
-                                    font-size: 11px;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+  }
 }
