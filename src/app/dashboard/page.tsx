@@ -7,9 +7,11 @@ import {
   getPriorityColorCode,
   getStatusColorCode,
 } from "../utils/utils";
-import { FiDownload } from "react-icons/fi";
+import { FiDownload, FiUpload } from "react-icons/fi";
 import Checkbox from "../DesignComponents/Checkbox";
 import { getPriorityIcon } from "../Components/utils";
+import { LuDot } from "react-icons/lu";
+import { MdOutlineDelete } from "react-icons/md";
 
 type ModalDataType = {
   [key: string]: any;
@@ -372,102 +374,211 @@ export default function DashboardPage() {
                     className="nav-link active"
                     aria-current="page"
                     href="javascript:void(0)"
+                    data-bs-toggle="tab"
+                    data-bs-target="#home"
+                    id="details-tab"
                   >
                     Details
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="javascript:void(0)">
+                  <a
+                    className="nav-link"
+                    href="javascript:void(0)"
+                    data-bs-toggle="tab"
+                    data-bs-target="#profile"
+                    id="comments-tab"
+                  >
                     Comments
                   </a>
                 </li>
               </ul>
-              <div
-                className="accordion mt-3"
-                id="accordionPanelsStayOpenExample"
-              >
-                <div className="accordion-item border">
-                  <div className="accordion-body">
-                    <div className="row">
-                      <div className="col-4">
-                        <p className="text-muted mb-1">Reconciliation ID:</p>
-                        <p className="text-dark">{modalData?.id} </p>
-                      </div>
-                      <div className="col-4">
-                        <p className="text-muted mb-1">Created on:</p>
-                        <p className="text-dark">
-                          {getDateInFormat(new Date(modalData?.createdOn))}
-                        </p>
-                      </div>
-                      <div className="col-4">
-                        <p className="text-muted mb-1">
-                          Reconciliation Balance:
-                        </p>
-                        <p className="text-dark">
-                          {modalData?.reconciliationBalance}{" "}
-                        </p>
-                      </div>
-                      <div className="col-4">
-                        <p className="text-muted mb-1">Status:</p>
+              <div className="tab-content">
+                <div
+                  className="tab-pane fade show active"
+                  id="home"
+                  role="tabpanel"
+                  aria-labelledby="details-tab"
+                  tabIndex={0}
+                >
+                  <div
+                    className="accordion mt-3"
+                    id="accordionPanelsStayOpenExample"
+                  >
+                    <div className="accordion-item border">
+                      <div className="accordion-body">
+                        <div className="row">
+                          <div className="col-4">
+                            <p className="text-muted mb-1">
+                              Reconciliation ID:
+                            </p>
+                            <p className="text-dark">{modalData?.id} </p>
+                          </div>
+                          <div className="col-4">
+                            <p className="text-muted mb-1">Created on:</p>
+                            <p className="text-dark">
+                              {getDateInFormat(new Date(modalData?.createdOn))}
+                            </p>
+                          </div>
+                          <div className="col-4">
+                            <p className="text-muted mb-1">
+                              Reconciliation Balance:
+                            </p>
+                            <p className="text-dark">
+                              {modalData?.reconciliationBalance}{" "}
+                            </p>
+                          </div>
+                          <div className="col-4">
+                            <p className="text-muted mb-1">Status:</p>
 
-                        <span
-                          className={`badge border border-${getStatusColorCode(
-                            modalData?.status || ""
-                          )} bg-light-${getStatusColorCode(modalData?.status || "")} text-${getStatusColorCode(modalData?.status || "")}`}
+                            <span
+                              className={`badge border border-${getStatusColorCode(
+                                modalData?.status || ""
+                              )} bg-light-${getStatusColorCode(modalData?.status || "")} text-${getStatusColorCode(modalData?.status || "")}`}
+                            >
+                              {modalData?.status}
+                            </span>
+                          </div>
+                          <div className="col-4">
+                            <p className="text-muted mb-1">Priority:</p>
+                            <span
+                              className={`text-${getPriorityColorCode(modalData?.priority || "")}`}
+                            >
+                              {getPriorityIcon(
+                                modalData?.priority || "",
+                                getPriorityColorCode(modalData?.priority || "")
+                              )}
+                              {modalData?.priority}
+                            </span>
+                          </div>
+                          <div className="col-4">
+                            <p className="text-muted mb-1">Deadline:</p>
+                            <p className="text-dark">
+                              {getDateInFormat(new Date(modalData?.createdOn))}
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          id="panelsStayOpen-collapseTwo"
+                          className="accordion-collapse collapse show"
                         >
-                          {modalData?.status}
-                        </span>
+                          <div className="">Hidden data</div>
+                        </div>
                       </div>
-                      <div className="col-4">
-                        <p className="text-muted mb-1">Priority:</p>
-                        <span
-                          className={`text-${getPriorityColorCode(modalData?.priority || "")}`}
-                        >
-                          {getPriorityIcon(
-                            modalData?.priority || "",
-                            getPriorityColorCode(modalData?.priority || "")
-                          )}
-                          {modalData?.priority}
-                        </span>
-                      </div>
-                      <div className="col-4">
-                        <p className="text-muted mb-1">Deadline:</p>
-                        <p className="text-dark">
-                          {getDateInFormat(new Date(modalData?.createdOn))}
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      id="panelsStayOpen-collapseTwo"
-                      className="accordion-collapse collapse show"
-                    >
-                      <div className="">Hidden data</div>
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseTwo"
+                        aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseTwo"
+                      >
+                        Show more
+                      </button>
                     </div>
                   </div>
-                  <button
-                    className="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseTwo"
-                    aria-expanded="true"
-                    aria-controls="panelsStayOpen-collapseTwo"
-                  >
-                    Show more
-                  </button>
+                  <div className="border p-3 rounded mt-3">
+                    <div className="row">
+                      <div className="col-6">410024</div>
+                      <div className="col-6 text-end">
+                        <a
+                          className="fw-bold text-decoration-none"
+                          href="javascript:void(0)"
+                        >
+                          <FiDownload />
+                          <span className="px-2">Download</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="border p-3 rounded mt-3">
+                    <div className="row">
+                      <div className="col-6">Upload</div>
+                      <div className="col-6 text-end">
+                        <a
+                          className="fw-bold text-decoration-none"
+                          href="javascript:void(0)"
+                        >
+                          <FiUpload />
+                          <span className="px-2">Upload</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="tab-pane fade"
+                  id="profile"
+                  role="tabpanel"
+                  aria-labelledby="comments-tab"
+                  tabIndex={0}
+                >
+                  <div className="comments-wrapper mt-3">
+                    <div className="comment mt-3">
+                      <textarea
+                        name=""
+                        id=""
+                        placeholder="Add your comments here"
+                        className="form-control"
+                      ></textarea>
+                    </div>
+                    <div className="comment mt-3">
+                      <div className="row">
+                        <div className="col-6">
+                          <h5 className="m-0">1 Justin case</h5>
+                        </div>
+                        <div className="col-6 text-end">
+                          <span className="text-muted">
+                            02:14 PM <LuDot /> 12th April 2025{" "}
+                            <MdOutlineDelete />
+                          </span>
+                        </div>
+                      </div>
+                      <div className="bg-grey bg-opacity-25 p-3 mt-2 rounded border">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco
+                      </div>
+                    </div>
+                    <div className="comment mt-3">
+                      <div className="row">
+                        <div className="col-6">
+                          <h5 className="m-0">2 Justin case</h5>
+                        </div>
+                        <div className="col-6 text-end">
+                          <span className="text-muted">
+                            02:14 PM <LuDot /> 12th April 2025{" "}
+                            <MdOutlineDelete />
+                          </span>
+                        </div>
+                      </div>
+                      <div className="bg-grey bg-opacity-25 p-3 mt-2 rounded border">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco
+                      </div>
+                    </div>
+                    <div className="comment mt-3">
+                      <div className="row">
+                        <div className="col-6">
+                          <h5 className="m-0">3 Justin case</h5>
+                        </div>
+                        <div className="col-6 text-end">
+                          <span className="text-muted">
+                            02:14 PM <LuDot /> 12th April 2025{" "}
+                            <MdOutlineDelete />
+                          </span>
+                        </div>
+                      </div>
+                      <div className="bg-grey bg-opacity-25 p-3 mt-2 rounded border">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="modal-footer justify-content-start">
-              <button type="button" className="btn btn-primary">
-                Understood
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
             </div>
           </div>
         </div>
