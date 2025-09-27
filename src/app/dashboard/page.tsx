@@ -74,7 +74,7 @@ export default function DashboardPage() {
         cell: ({ cell }: { cell: any }) => {
           const balance = cell.getValue();
           return (
-            <span className="text-end pe-5 d-inline-block pe-5 text-end w-100">
+            <span className="text-md-end pe-5 d-inline-block pe-5 w-100">
               {balance}
             </span>
           );
@@ -216,13 +216,13 @@ export default function DashboardPage() {
             <div className="row">
               <div className="col-12 col-md-6">
                 <div className="row justify-content-center align-items-center">
-                  <div className="col-4">
+                  <div className="col-12 col-lg-4 d-none d-lg-flex">
                     <div
                       style={{ width: 160, height: 160, borderRadius: "50%" }}
                       className="bg-primary"
                     ></div>
                   </div>
-                  <div className="col-5">
+                  <div className="col-12 col-lg-5">
                     <h5>Reconciliation status</h5>
                     <p className="m-0">8: Total</p>
                     <p className="mt-2 mb-0">
@@ -242,13 +242,13 @@ export default function DashboardPage() {
               </div>
               <div className="col-12 col-md-6 border-start">
                 <div className="row justify-content-center align-items-center">
-                  <div className="col-4">
+                  <div className="col-12 col-lg-4 d-none d-lg-flex">
                     <div
                       style={{ width: 160, height: 160, borderRadius: "50%" }}
                       className="bg-primary"
                     ></div>
                   </div>
-                  <div className="col-5">
+                  <div className="col-12 col-lg-5">
                     <h5>Priority</h5>
                     <p className="m-0">8: Total</p>
                     <p className="mt-2 mb-0">
