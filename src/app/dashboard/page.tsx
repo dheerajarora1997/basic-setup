@@ -54,7 +54,6 @@ export default function DashboardPage() {
         cell: ({ cell }: { cell: any }) => {
           const status = cell.getValue();
           let badgeClass = "bg-secondary";
-          console.log("status", status);
           if (status.toLowerCase() === "review") badgeClass = "warning";
           else if (status.toLowerCase() === "completed") badgeClass = "success";
           else if (status.toLowerCase() === "prepare") badgeClass = "info";
@@ -74,7 +73,11 @@ export default function DashboardPage() {
         accessorKey: "reconciliationBalance",
         cell: ({ cell }: { cell: any }) => {
           const balance = cell.getValue();
-          return <span className="ps-5">{balance}</span>;
+          return (
+            <span className="text-end pe-5 d-inline-block pe-5 text-end w-100">
+              {balance}
+            </span>
+          );
         },
       },
       {
@@ -84,6 +87,16 @@ export default function DashboardPage() {
       {
         header: "Created on",
         accessorKey: "createdOn",
+        cell: ({ cell }: { cell: any }) => {
+          const date = new Date(cell.getValue());
+          const year = date.getUTCFullYear();
+          const month = date.toLocaleString("en-US", {
+            month: "long",
+            timeZone: "UTC",
+          });
+          const day = date.getUTCDate();
+          return <span className="ps-2">{`${day} ${month} ${year}`}</span>;
+        },
       },
       {
         header: "",
@@ -105,50 +118,50 @@ export default function DashboardPage() {
       id: "1001",
       priority: "High",
       status: "Prepare",
-      reconciliationBalance: "57,977.87",
+      reconciliationBalance: "54,345.87",
       currency: "USD",
-      createdOn: "2025-04-10",
+      createdOn: "2025-04-10T00:00:00Z",
       Download: "download link here",
     },
     {
       id: "1002",
       priority: "Medium",
       status: "Completed",
-      reconciliationBalance: "57,977.87",
+      reconciliationBalance: "977.87",
       currency: "EUR",
-      createdOn: "2025-04-11",
+      createdOn: "2025-04-11T00:00:00Z",
     },
     {
       id: "1003",
       priority: "Low",
       status: "Review",
-      reconciliationBalance: "57,977.87",
+      reconciliationBalance: "72,245.87",
       currency: "GBP",
-      createdOn: "2025-04-12",
+      createdOn: "2025-04-12T00:00:00Z",
     },
     {
       id: "1004",
       priority: "High",
       status: "Review",
-      reconciliationBalance: "57,977.87",
+      reconciliationBalance: "65,432.87",
       currency: "USD",
-      createdOn: "2025-04-13",
+      createdOn: "2025-04-13T00:00:00Z",
     },
     {
       id: "1005",
       priority: "Medium",
       status: "Completed",
-      reconciliationBalance: "57,977.87",
+      reconciliationBalance: "7,121.87",
       currency: "AUD",
-      createdOn: "2025-04-13",
+      createdOn: "2025-04-13T00:00:00Z",
     },
     {
       id: "1006",
       priority: "Low",
       status: "Failed",
-      reconciliationBalance: "57,977.87",
+      reconciliationBalance: "5,657.87",
       currency: "CAD",
-      createdOn: "2025-04-14",
+      createdOn: "2025-04-14T00:00:00Z",
     },
     {
       id: "1007",
@@ -156,7 +169,7 @@ export default function DashboardPage() {
       status: "Prepare",
       reconciliationBalance: "5,943.87",
       currency: "INR",
-      createdOn: "2025-04-14",
+      createdOn: "2025-04-14T00:00:00Z",
     },
     {
       id: "1008",
@@ -164,7 +177,7 @@ export default function DashboardPage() {
       status: "Completed",
       reconciliationBalance: "57,977.87",
       currency: "USD",
-      createdOn: "2025-04-15",
+      createdOn: "2025-04-15T00:00:00Z",
     },
     {
       id: "1009",
@@ -172,15 +185,7 @@ export default function DashboardPage() {
       status: "Review",
       reconciliationBalance: "87.65",
       currency: "EUR",
-      createdOn: "2025-04-15",
-    },
-    {
-      id: "1010",
-      priority: "High",
-      status: "Failed",
-      reconciliationBalance: "57,977.87",
-      currency: "JPY",
-      createdOn: "2025-04-16",
+      createdOn: "2025-04-15T00:00:00Z",
     },
   ]);
   const fallbackData = [
@@ -190,18 +195,18 @@ export default function DashboardPage() {
       status: "Failed",
       reconciliationBalance: "57,977.87",
       currency: "JPY",
-      createdOn: "2025-04-16",
+      createdOn: "2025-04-16T00:00:00Z",
     },
   ];
   return (
     <>
       <section className="py-3">
         <div className="container">
-          <div className="row">
+          <div className="row justify-content-between align-items-center">
             <div className="col-12 col-md-8">
-              <h3>My reconciliations</h3>
+              <h3 className="fw-bold">My reconciliations</h3>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-3">
               <div className="form-group m-0">
                 <input type="date" name="" id="" className="form-control" />
               </div>

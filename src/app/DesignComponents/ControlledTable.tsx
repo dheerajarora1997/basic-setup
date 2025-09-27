@@ -55,7 +55,6 @@ export default function ControlledTable({
     pageIndex: 0,
     pageSize: pageSizeToDisplay,
   });
-  console.log("data", enableMultiRowSelection);
   const tableInstance = useReactTable({
     data: data ?? fallbackData,
     columns,
