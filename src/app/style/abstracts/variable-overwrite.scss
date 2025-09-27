@@ -31,6 +31,18 @@ $pagination-border-radius: 6px;
 $pagination-padding-x: 0.8rem;
 $pagination-padding-y: 0.4rem;
 
+// modal
+$modal-lg: 600px;
+
+// Accordion
+$accordion-border-radius: 6px;
+$accordion-padding: 0.4rem;
+$accordion-margin-bottom: 1rem;
+$accordion-btn-bg: $primary;
+$accordion-btn-padding-y: 0.4rem;
+$accordion-btn-padding-x: 0.25rem;
+$accordion-inner-border-radius: 0;
+
 // Theme colors map
 $theme-colors: (
   "primary": $primary,

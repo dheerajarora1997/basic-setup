@@ -1,11 +1,10 @@
 "use client";
-
+import { JSX } from "react";
+import { HiMiniEquals } from "react-icons/hi2";
 import {
   MdOutlineKeyboardDoubleArrowUp,
   MdOutlineKeyboardDoubleArrowDown,
 } from "react-icons/md";
-import React, { JSX } from "react";
-import { HiMiniEquals } from "react-icons/hi2";
 
 export const getPriorityIcon = (
   priority: string,

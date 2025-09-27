@@ -2,11 +2,25 @@
 
 import { useMemo, useState } from "react";
 import ControlledTable from "../DesignComponents/ControlledTable";
-import { getPriorityIcon } from "../Components/utils";
+import {
+  getDateInFormat,
+  getPriorityColorCode,
+  getStatusColorCode,
+} from "../utils/utils";
 import { FiDownload } from "react-icons/fi";
 import Checkbox from "../DesignComponents/Checkbox";
+import { getPriorityIcon } from "../Components/utils";
+
+type ModalDataType = {
+  [key: string]: any;
+};
 
 export default function DashboardPage() {
+  const [modalData, setModalData] = useState<ModalDataType>({});
+  const openModalDialog = (id: string, data: any) => {
+    console.log("Open modal for ID:", id, data);
+    setModalData(data);
+  };
   const columns = useMemo(
     () => [
       {
@@ -29,20 +43,32 @@ export default function DashboardPage() {
       {
         header: "Reconciliation ID",
         accessorKey: "id",
+        cell: ({ cell }: { cell: any }) => {
+          const id = cell.getValue();
+          const data = cell.row.original;
+          return (
+            <span
+              onClick={() => {
+                openModalDialog(id, data);
+              }}
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+              className="ps-2"
+            >
+              {id}
+            </span>
+          );
+        },
       },
       {
         header: "Priority",
         accessorKey: "priority",
         cell: ({ cell }: { cell: any }) => {
           const priority = cell.getValue();
-          let icon = "bg-secondary";
-          if (priority.toLowerCase() === "high") icon = "danger";
-          else if (priority.toLowerCase() === "medium") icon = "warning";
-          else if (priority.toLowerCase() === "low") icon = "muted";
-          else icon = "primary";
+          let priorityColorCode = getPriorityColorCode(priority) || "primary";
           return (
-            <span className={`text-${icon}`}>
-              {getPriorityIcon(priority, icon)}
+            <span className={`text-${priorityColorCode}`}>
+              {getPriorityIcon(priority, priorityColorCode)}
               {priority}
             </span>
           );
@@ -53,12 +79,8 @@ export default function DashboardPage() {
         accessorKey: "status",
         cell: ({ cell }: { cell: any }) => {
           const status = cell.getValue();
-          let badgeClass = "bg-secondary";
-          if (status.toLowerCase() === "review") badgeClass = "warning";
-          else if (status.toLowerCase() === "completed") badgeClass = "success";
-          else if (status.toLowerCase() === "prepare") badgeClass = "info";
-          else if (status.toLowerCase() === "failed") badgeClass = "danger";
-          else badgeClass = "primary";
+          let badgeClass = getStatusColorCode(status) || "";
+
           return (
             <span
               className={`badge border border-${badgeClass} bg-light-${badgeClass} text-${badgeClass}`}
@@ -89,18 +111,12 @@ export default function DashboardPage() {
         accessorKey: "createdOn",
         cell: ({ cell }: { cell: any }) => {
           const date = new Date(cell.getValue());
-          const year = date.getUTCFullYear();
-          const month = date.toLocaleString("en-US", {
-            month: "long",
-            timeZone: "UTC",
-          });
-          const day = date.getUTCDate();
-          return <span className="ps-2">{`${day} ${month} ${year}`}</span>;
+          return <span className="ps-2">{getDateInFormat(date)}</span>;
         },
       },
       {
         header: "",
-        accessorKey: "Download",
+        accessorKey: "download",
         cell: ({ cell }: { cell: any }) => {
           const download = cell.getValue();
           return (
@@ -121,7 +137,7 @@ export default function DashboardPage() {
       reconciliationBalance: "54,345.87",
       currency: "USD",
       createdOn: "2025-04-10T00:00:00Z",
-      Download: "download link here",
+      download: "download link here",
     },
     {
       id: "1002",
@@ -130,6 +146,7 @@ export default function DashboardPage() {
       reconciliationBalance: "977.87",
       currency: "EUR",
       createdOn: "2025-04-11T00:00:00Z",
+      download: "download link here",
     },
     {
       id: "1003",
@@ -138,6 +155,7 @@ export default function DashboardPage() {
       reconciliationBalance: "72,245.87",
       currency: "GBP",
       createdOn: "2025-04-12T00:00:00Z",
+      download: "download link here",
     },
     {
       id: "1004",
@@ -146,6 +164,7 @@ export default function DashboardPage() {
       reconciliationBalance: "65,432.87",
       currency: "USD",
       createdOn: "2025-04-13T00:00:00Z",
+      download: "download link here",
     },
     {
       id: "1005",
@@ -154,6 +173,7 @@ export default function DashboardPage() {
       reconciliationBalance: "7,121.87",
       currency: "AUD",
       createdOn: "2025-04-13T00:00:00Z",
+      download: "download link here",
     },
     {
       id: "1006",
@@ -162,6 +182,7 @@ export default function DashboardPage() {
       reconciliationBalance: "5,657.87",
       currency: "CAD",
       createdOn: "2025-04-14T00:00:00Z",
+      download: "download link here",
     },
     {
       id: "1007",
@@ -170,6 +191,7 @@ export default function DashboardPage() {
       reconciliationBalance: "5,943.87",
       currency: "INR",
       createdOn: "2025-04-14T00:00:00Z",
+      download: "download link here",
     },
     {
       id: "1008",
@@ -178,6 +200,7 @@ export default function DashboardPage() {
       reconciliationBalance: "57,977.87",
       currency: "USD",
       createdOn: "2025-04-15T00:00:00Z",
+      download: "download link here",
     },
     {
       id: "1009",
@@ -186,6 +209,7 @@ export default function DashboardPage() {
       reconciliationBalance: "87.65",
       currency: "EUR",
       createdOn: "2025-04-15T00:00:00Z",
+      download: "download link here",
     },
   ]);
   const fallbackData = [
@@ -314,6 +338,140 @@ export default function DashboardPage() {
           </div>
         </div>
       </section>
+      <div
+        className="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex={-1}
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="row w-100">
+                <div className="col-6">
+                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                    Reconciliation details
+                  </h1>
+                </div>
+                <div className="col-6"></div>
+              </div>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body overflow-scroll">
+              <ul className="nav nav-tabs p-1">
+                <li className="nav-item">
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href="javascript:void(0)"
+                  >
+                    Details
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="javascript:void(0)">
+                    Comments
+                  </a>
+                </li>
+              </ul>
+              <div
+                className="accordion mt-3"
+                id="accordionPanelsStayOpenExample"
+              >
+                <div className="accordion-item border">
+                  <div className="accordion-body">
+                    <div className="row">
+                      <div className="col-4">
+                        <p className="text-muted mb-1">Reconciliation ID:</p>
+                        <p className="text-dark">{modalData?.id} </p>
+                      </div>
+                      <div className="col-4">
+                        <p className="text-muted mb-1">Created on:</p>
+                        <p className="text-dark">
+                          {getDateInFormat(new Date(modalData?.createdOn))}
+                        </p>
+                      </div>
+                      <div className="col-4">
+                        <p className="text-muted mb-1">
+                          Reconciliation Balance:
+                        </p>
+                        <p className="text-dark">
+                          {modalData?.reconciliationBalance}{" "}
+                        </p>
+                      </div>
+                      <div className="col-4">
+                        <p className="text-muted mb-1">Status:</p>
+
+                        <span
+                          className={`badge border border-${getStatusColorCode(
+                            modalData?.status || ""
+                          )} bg-light-${getStatusColorCode(modalData?.status || "")} text-${getStatusColorCode(modalData?.status || "")}`}
+                        >
+                          {modalData?.status}
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <p className="text-muted mb-1">Priority:</p>
+                        <span
+                          className={`text-${getPriorityColorCode(modalData?.priority || "")}`}
+                        >
+                          {getPriorityIcon(
+                            modalData?.priority || "",
+                            getPriorityColorCode(modalData?.priority || "")
+                          )}
+                          {modalData?.priority}
+                        </span>
+                      </div>
+                      <div className="col-4">
+                        <p className="text-muted mb-1">Deadline:</p>
+                        <p className="text-dark">
+                          {getDateInFormat(new Date(modalData?.createdOn))}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      id="panelsStayOpen-collapseTwo"
+                      className="accordion-collapse collapse show"
+                    >
+                      <div className="">Hidden data</div>
+                    </div>
+                  </div>
+                  <button
+                    className="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo"
+                    aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseTwo"
+                  >
+                    Show more
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer justify-content-start">
+              <button type="button" className="btn btn-primary">
+                Understood
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

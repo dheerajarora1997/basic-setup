@@ -535,6 +535,33 @@ export default function StyleGuide() {
             </div>
           </div>
         </div>
+        <div className="row my-5">
+          <div className="col-12">
+            <div className="accordion" id="accordionPanelsStayOpenExample">
+              <div className="accordion-item border">
+                <div className="accordion-body">Visible data</div>
+                <div
+                  id="panelsStayOpen-collapseOne"
+                  className="accordion-collapse collapse show"
+                >
+                  <div className="accordion-body">Hidden data</div>
+                </div>
+                <h2 className="accordion-header">
+                  <button
+                    className="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne"
+                    aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseOne"
+                  >
+                    Show more
+                  </button>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

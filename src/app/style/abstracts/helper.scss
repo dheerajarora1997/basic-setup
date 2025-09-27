@@ -83,3 +83,23 @@
     }
   }
 }
+
+.accordion {
+  .accordion-item {
+    .accordion-button {
+      text-align: center;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: $light-primary;
+      color: $primary;
+      font-weight: 700;
+      &:after {
+        display: inline-block;
+        width: 0.7rem;
+        height: 0.7rem;
+        background-size: cover;
+        margin: 0 8px;
+      }
+    }
+  }
+}
