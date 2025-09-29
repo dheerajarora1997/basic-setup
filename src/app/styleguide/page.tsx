@@ -2,136 +2,227 @@
 
 import { useMemo, useState } from "react";
 import ControlledTable from "../DesignComponents/ControlledTable";
-
-type Invoice = {
-  id: string;
-  productName: string;
-  quantity: number;
-  totalPrice: number;
-  date: string;
-  customer: string;
-};
+import Checkbox from "../DesignComponents/Checkbox";
+import {
+  getDateInFormat,
+  getPriorityColorCode,
+  getStatusColorCode,
+} from "../utils/utils";
+import { FiDownload, FiUpload } from "react-icons/fi";
+import { getPriorityIcon } from "../Components/utils";
+import { LuDot } from "react-icons/lu";
+import { MdOutlineDelete } from "react-icons/md";
 
 export default function StyleGuide() {
+  // Define the ModalDataType interface
+  interface ModalDataType {
+    [key: string]: any;
+  }
+  
+  const [modalData, setModalData] = useState<ModalDataType>({});
+  const openModalDialog = (id: string, data: any) => {
+    console.log("Open modal for ID:", id, data);
+    setModalData(data);
+  };
   const columns = useMemo(
     () => [
       {
+        id: "select-col",
+        header: ({ table }: { table: any }) => (
+          <Checkbox
+            checked={table.getIsAllRowsSelected()}
+            indeterminate={table.getIsSomeRowsSelected()}
+            onChange={table.getToggleAllRowsSelectedHandler()} //or getToggleAllPageRowsSelectedHandler
+          />
+        ),
+        cell: ({ row }: { row: any }) => (
+          <Checkbox
+            checked={row.getIsSelected()}
+            disabled={!row.getCanSelect()}
+            onChange={row.getToggleSelectedHandler()}
+          />
+        ),
+      },
+      {
         header: "Reconciliation ID",
         accessorKey: "id",
+        cell: ({ cell }: { cell: any }) => {
+          const id = cell.getValue();
+          const data = cell.row.original;
+          return (
+            <span
+              onClick={() => {
+                openModalDialog(id, data);
+              }}
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+              className="ps-2"
+            >
+              {id}
+            </span>
+          );
+        },
       },
       {
         header: "Priority",
-        accessorKey: "date",
+        accessorKey: "priority",
+        cell: ({ cell }: { cell: any }) => {
+          const priority = cell.getValue();
+          let priorityColorCode = getPriorityColorCode(priority) || "primary";
+          return (
+            <span className={`text-${priorityColorCode}`}>
+              {getPriorityIcon(priority, priorityColorCode)}
+              {priority}
+            </span>
+          );
+        },
       },
       {
         header: "Status",
-        accessorKey: "customer",
+        accessorKey: "status",
+        // cell: ({ cell }: { cell: any }) => {
+        //   const status = cell.getValue();
+        //   let badgeClass = getStatusColorCode(status) || "";
+
+        //   return (
+        //     <span
+        //       className={`badge border border-${badgeClass} bg-light-${badgeClass} text-${badgeClass}`}
+        //     >
+        //       {status}
+        //     </span>
+        //   );
+        // },
       },
       {
         header: "Reconciliation Balance",
-        accessorKey: "productName",
+        accessorKey: "reconciliationBalance",
+        cell: ({ cell }: { cell: any }) => {
+          const balance = cell.getValue();
+          return (
+            <span className="text-md-end pe-5 d-inline-block pe-5 w-100">
+              {balance}
+            </span>
+          );
+        },
       },
       {
         header: "Currency",
-        accessorKey: "quantity",
+        accessorKey: "currency",
       },
       {
         header: "Created on",
-        accessorKey: "totalPrice",
+        accessorKey: "createdOn",
+        cell: ({ cell }: { cell: any }) => {
+          const date = new Date(cell.getValue());
+          return <span className="ps-2">{getDateInFormat(date)}</span>;
+        },
+      },
+      {
+        header: "",
+        accessorKey: "download",
+        cell: ({ cell }: { cell: any }) => {
+          const download = cell.getValue();
+          return (
+            <a href={`${download}`} className="ps-2 text-primary">
+              <FiDownload />
+            </a>
+          );
+        },
       },
     ],
     []
   );
   const [data, setData] = useState(() => [
     {
-      id: "REC-1001",
-      date: "High", // Priority
-      customer: "Pending", // Status
-      productName: "Balance Mismatch - Account A", // Reconciliation Balance
-      quantity: "USD", // Currency
-      totalPrice: "2025-04-10", // Created on
+      id: "1001",
+      priority: "High",
+      status: "Prepare",
+      reconciliationBalance: "54,345.87",
+      currency: "USD",
+      createdOn: "2025-04-10T00:00:00Z",
+      download: "download link here",
     },
     {
-      id: "REC-1002",
-      date: "Medium",
-      customer: "Completed",
-      productName: "Transaction Review - Account B",
-      quantity: "EUR",
-      totalPrice: "2025-04-11",
+      id: "1002",
+      priority: "Medium",
+      status: "Completed",
+      reconciliationBalance: "977.87",
+      currency: "EUR",
+      createdOn: "2025-04-11T00:00:00Z",
+      download: "download link here",
     },
     {
-      id: "REC-1003",
-      date: "Low",
-      customer: "In Progress",
-      productName: "Mismatch in Ledger - Dept X",
-      quantity: "GBP",
-      totalPrice: "2025-04-12",
+      id: "1003",
+      priority: "Low",
+      status: "Review",
+      reconciliationBalance: "72,245.87",
+      currency: "GBP",
+      createdOn: "2025-04-12T00:00:00Z",
+      download: "download link here",
     },
     {
-      id: "REC-1004",
-      date: "High",
-      customer: "Pending",
-      productName: "Invoice Discrepancy - Client Z",
-      quantity: "USD",
-      totalPrice: "2025-04-13",
+      id: "1004",
+      priority: "High",
+      status: "Review",
+      reconciliationBalance: "65,432.87",
+      currency: "USD",
+      createdOn: "2025-04-13T00:00:00Z",
+      download: "download link here",
     },
     {
-      id: "REC-1005",
-      date: "Medium",
-      customer: "Completed",
-      productName: "Bank Reconciliation - April",
-      quantity: "AUD",
-      totalPrice: "2025-04-13",
+      id: "1005",
+      priority: "Medium",
+      status: "Completed",
+      reconciliationBalance: "7,121.87",
+      currency: "AUD",
+      createdOn: "2025-04-13T00:00:00Z",
+      download: "download link here",
     },
     {
-      id: "REC-1006",
-      date: "Low",
-      customer: "Failed",
-      productName: "System Error Correction",
-      quantity: "CAD",
-      totalPrice: "2025-04-14",
+      id: "1006",
+      priority: "Low",
+      status: "Failed",
+      reconciliationBalance: "5,657.87",
+      currency: "CAD",
+      createdOn: "2025-04-14T00:00:00Z",
+      download: "download link here",
     },
     {
-      id: "REC-1007",
-      date: "High",
-      customer: "Pending",
-      productName: "Unposted Journals Review",
-      quantity: "INR",
-      totalPrice: "2025-04-14",
+      id: "1007",
+      priority: "High",
+      status: "Prepare",
+      reconciliationBalance: "5,943.87",
+      currency: "INR",
+      createdOn: "2025-04-14T00:00:00Z",
+      download: "download link here",
     },
     {
-      id: "REC-1008",
-      date: "Medium",
-      customer: "Completed",
-      productName: "Manual Adjustments",
-      quantity: "USD",
-      totalPrice: "2025-04-15",
+      id: "1008",
+      priority: "Medium",
+      status: "Completed",
+      reconciliationBalance: "57,977.87",
+      currency: "USD",
+      createdOn: "2025-04-15T00:00:00Z",
+      download: "download link here",
     },
     {
-      id: "REC-1009",
-      date: "Low",
-      customer: "In Progress",
-      productName: "Suspense Account Cleanup",
-      quantity: "EUR",
-      totalPrice: "2025-04-15",
-    },
-    {
-      id: "REC-1010",
-      date: "High",
-      customer: "Failed",
-      productName: "Currency Exchange Error",
-      quantity: "JPY",
-      totalPrice: "2025-04-16",
+      id: "1009",
+      priority: "Low",
+      status: "Review",
+      reconciliationBalance: "87.65",
+      currency: "EUR",
+      createdOn: "2025-04-15T00:00:00Z",
+      download: "download link here",
     },
   ]);
-
   const fallbackData = [
     {
-      name: "Fallback User",
-      email: "fallback@example.com",
-      role: "Guest",
-      age: "33",
-      department: "new",
+      id: "1010",
+      priority: "High",
+      status: "Failed",
+      reconciliationBalance: "57,977.87",
+      currency: "JPY",
+      createdOn: "2025-04-16T00:00:00Z",
     },
   ];
 
@@ -513,7 +604,7 @@ export default function StyleGuide() {
                       aria-label="Close"
                     ></button>
                   </div>
-                  <div className="modal-body overflow-scroll">
+                  <div className="modal-body overflow-scroll pt-0">
                     Before getting started with Bootstrap’s modal component, be
                     sure to read the following as our menu options have recently
                     changed.
@@ -536,7 +627,7 @@ export default function StyleGuide() {
           </div>
         </div>
         <div className="row my-5">
-          <div className="col-12">
+          <div className="col-12 col-md-4">
             <div className="accordion" id="accordionPanelsStayOpenExample">
               <div className="accordion-item border">
                 <div className="accordion-body">Visible data</div>

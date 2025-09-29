@@ -367,32 +367,34 @@ export default function DashboardPage() {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body overflow-scroll">
-              <ul className="nav nav-tabs p-1">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    aria-current="page"
-                    href="javascript:void(0)"
-                    data-bs-toggle="tab"
-                    data-bs-target="#home"
-                    id="details-tab"
-                  >
-                    Details
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    href="javascript:void(0)"
-                    data-bs-toggle="tab"
-                    data-bs-target="#profile"
-                    id="comments-tab"
-                  >
-                    Comments
-                  </a>
-                </li>
-              </ul>
+            <div className="modal-body overflow-scroll pt-0">
+              <div className="nav-wrapper">
+                <ul className="nav nav-tabs p-1">
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active"
+                      aria-current="page"
+                      href="javascript:void(0)"
+                      data-bs-toggle="tab"
+                      data-bs-target="#home"
+                      id="details-tab"
+                    >
+                      Details
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      href="javascript:void(0)"
+                      data-bs-toggle="tab"
+                      data-bs-target="#profile"
+                      id="comments-tab"
+                    >
+                      Comments
+                    </a>
+                  </li>
+                </ul>
+              </div>
               <div className="tab-content">
                 <div
                   className="tab-pane fade show active"
@@ -514,7 +516,7 @@ export default function DashboardPage() {
                   tabIndex={0}
                 >
                   <div className="comments-wrapper mt-3">
-                    <div className="comment mt-3">
+                    <div className="comment mt-3 comment-field">
                       <textarea
                         name=""
                         id=""

@@ -103,12 +103,20 @@
     }
   }
 }
+.modal .nav-wrapper{
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+}
 
 .comments-wrapper {
   display: flex;
   flex-direction: column-reverse;
-  max-height: 560px;
-  min-height: 560px;
-  padding-right: 15px;
-  overflow: scroll;
+
+  .comment-field{
+    position: sticky;
+    bottom: 0;
+    background: $light;
+  }
 }
